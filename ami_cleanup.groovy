@@ -82,13 +82,8 @@ for image in images:
             except Exception as e:
                 rows.append(['Error Deleting Snapshot', ami_id, ami_name, f"{snapshot_id}: {e}"])
 
-# Sort rows so 'Skipping' entries come first
 rows_sorted = sorted(rows, key=lambda r: (r[0] != 'Skipping', r[2]))
-
-# Print to console
 print(tabulate(rows_sorted, headers=["Action", "AMI ID", "AMI Name", "Snapshot ID"], tablefmt="grid"))
-
-# Write report to file
 with open("ami_cleanup_report.txt", "w") as f:
     f.write(tabulate(rows_sorted, headers=["Action", "AMI ID", "AMI Name", "Snapshot ID"], tablefmt="grid"))
 '''
